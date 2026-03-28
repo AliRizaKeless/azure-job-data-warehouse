@@ -2,7 +2,6 @@ import requests
 import json
 from datetime import datetime
 
-# NAV job API (public feed)
 URL = "https://arbeidsplassen.nav.no/public-feed/api/v1/ads"
 
 def fetch_jobs():
