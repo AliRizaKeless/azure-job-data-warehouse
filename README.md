@@ -16,5 +16,3 @@ This project aims to build a small data warehouse solution on Azure using job ma
 
 ## Status
 Project started
-
-Tests
