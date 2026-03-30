@@ -2,7 +2,7 @@ import requests
 import json
 from datetime import datetime
 
-URL = "https://arbeidsplassen.nav.no/public-feed/api/v1/ads"
+URL = "https://arbeidsplassen.nav.no/public-feed/api/v1/ads?size=50"
 
 def fetch_jobs():
     response = requests.get(URL)
