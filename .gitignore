@@ -5,3 +5,4 @@ __pycache__/
 data/raw/*.json
 data/raw/*.json
 data/processed/*.csv
+data/warehouse/*.csv
