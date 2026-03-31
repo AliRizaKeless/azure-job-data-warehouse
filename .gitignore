@@ -6,3 +6,6 @@ data/raw/*.json
 data/raw/*.json
 data/processed/*.csv
 data/warehouse/*.csv
+infra/.terraform/
+infra/*.tfstate
+infra/*.tfstate.backup
