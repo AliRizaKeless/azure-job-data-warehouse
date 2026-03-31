@@ -98,3 +98,8 @@ Future Improvements
 Status
 Project in progress.
 Current version includes ingestion, transformation, star schema modeling, SQL queries, and Azure infrastructure provisioning.
+
+## How to Run
+
+```bash
+python run_pipeline.py
