@@ -1,70 +1,100 @@
-# Azure Job Data Warehouse
-End-to-end Data Engineering Project using Python, SQL, and Azure
+Azure Job Data Warehouse
+End-to-end data engineering project that ingests job market data, transforms raw JSON into structured datasets, models the data using a star schema, and prepares it for SQL-based analytics on Azure.
 
-A small end-to-end data engineering project that ingests job market data, transforms it into structured datasets, models it as a star schema, and prepares it for SQL-based analytics on Azure.
+Project Goal
+The goal of this project is to demonstrate a cloud-oriented data warehouse pipeline using Python, SQL, and Azure infrastructure.
 
-## Project Goal
+This project covers the core stages of a modern data engineering workflow:
+- Raw data ingestion
+- Data transformation
+- Star schema modeling
+- SQL analytics
+- Azure Blob Storage provisioning with Terraform
 
-This project demonstrates a simple data warehouse pipeline using job market data and Azure cloud infrastructure.
+Architecture
+Job API / Feed
+      |
+      v
+Raw JSON Data
+      |
+      v
+Python Transformation Layer
+      |
+      v
+Processed CSV Datasets
+      |
+      v
+Star Schema Warehouse Tables
+      |
+      v
+SQL Analytics Layer
+      |
+      v
+Azure Blob Storage
 
-## Architecture
+Tech Stack
+Python
+SQL
+Terraform
+Azure Blob Storage
+CSV / JSON
+Git & GitHub
 
-Job API / Feed  
-→ Raw JSON ingestion  
-→ Transformation to structured CSV  
-→ Star schema modeling  
-→ SQL analytics layer  
-→ Azure Blob Storage provisioned with Terraform  
-
-## Tech Stack
-
-- Python  
-- SQL  
-- Terraform  
-- Azure Blob Storage  
-- CSV / JSON  
-
-## Project Structure
-
-```text
-src/
-  ingest/
-    fetch_jobs.py
-  transform/
-    transform_jobs.py
-    build_star_schema.py
-
-infra/
-  main.tf
-
-data/
-  raw/
-  processed/
-  warehouse/
-
-sql_queries.sql
+Project Structure
+azure-job-data-warehouse/
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── warehouse/
+│
+├── infra/
+│   └── main.tf
+│
+├── src/
+│   └── azure_job_data_warehouse/
+│       ├── ingest/
+│       │   └── fetch_jobs.py
+│       ├── transform/
+│       │   ├── transform_jobs.py
+│       │   └── build_star_schema.py
+│       └── utils/
+│
+├── tests/
+├── run_pipeline.py
+├── sql_queries.sql
+├── requirements.txt
+└── README.md
 
 Data Model
+The warehouse layer follows a basic star schema design.
 
 Fact Table
-   fact_jobs
-       job_id
-       title
-       company_id
-       location_id
-       date
+fact_jobs
+
+| Column      | Description                        |
+| ----------- | ---------------------------------- |
+| job_id      | Unique job identifier              |
+| title       | Job title                          |
+| company_id  | Foreign key to companies dimension |
+| location_id | Foreign key to locations dimension |
+| date        | Job posting date                   |
 
 Dimension Tables
-   companies
-       company_id
-       company_name
-   locations
-       location_id
-       location_name
+companies
 
-Sample Output
+| Column       | Description               |
+| ------------ | ------------------------- |
+| company_id   | Unique company identifier |
+| company_name | Company name              |
 
-Example Job Record
+locations
+
+| Column        | Description                |
+| ------------- | -------------------------- |
+| location_id   | Unique location identifier |
+| location_name | Location name              |
+
+Example Record
 {
   "title": "Sjåfør og Montør",
   "company": "ARNESEN HVITEVARER AS",
@@ -72,34 +102,41 @@ Example Job Record
   "date": "2023-06-14"
 }
 
-Example Aggregation
-SELECT location, COUNT(*) as job_count
+Example SQL Query
+SELECT location, COUNT(*) AS job_count
 FROM fact_jobs
 GROUP BY location
 ORDER BY job_count DESC;
 
-Example SQL Queries
-Top companies by number of job postings
-Jobs per location
-Latest job postings
+How to Run
+Install dependencies:
+pip install -r requirements.txt
+Run the pipeline:
+python run_pipeline.py
 
 Infrastructure
-Terraform provisions:
-    Azure Resource Group
-    Azure Storage Account
-    Azure Storage Container
+Terraform provisions the following Azure resources:
+Azure Resource Group
+Azure Storage Account
+Azure Storage Container
 
-Future Improvements
-    Add orchestration (e.g., Airflow)
-    Load data into Azure SQL or Synapse
-    Add data quality checks
-    Automate pipeline with CI/CD
+Current Status
+The current version includes:
+Raw data ingestion
+JSON-to-CSV transformation
+Star schema generation
+SQL analytics queries
+Azure Blob Storage infrastructure provisioning
 
-Status
-Project in progress.
-Current version includes ingestion, transformation, star schema modeling, SQL queries, and Azure infrastructure provisioning.
+Roadmap
+Planned improvements:
+Add Docker support
+Add structured logging
+Add automated tests
+Add data quality checks
+Add orchestration with Apache Airflow
+Load curated warehouse tables into Azure SQL or Synapse
+Add CI/CD with GitHub Actions
 
-## How to Run
-
-```bash
-python run_pipeline.py
+Author
+Ali Rıza Keles
