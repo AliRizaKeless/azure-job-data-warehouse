@@ -108,59 +108,84 @@ locations
 | location_id   | Unique location identifier |
 | location_name | Location name              |
 
-Example Record
+---
+
+## Example Record
+
+```json
 {
   "title": "Sjåfør og Montør",
   "company": "ARNESEN HVITEVARER AS",
   "location": "BERGEN",
   "date": "2023-06-14"
 }
-Example SQL Query
+```
+
+---
+
+## Example SQL Query
+
+```sql
 SELECT location, COUNT(*) AS job_count
 FROM fact_jobs
 GROUP BY location
 ORDER BY job_count DESC;
+```
 
-How to Run
+---
+
+## How to Run
 
 Install dependencies:
 
+```bash
 pip install -r requirements.txt
+```
 
 Run the pipeline:
 
+```bash
 python run_pipeline.py
+```
 
-Infrastructure
+---
+
+## Infrastructure
 
 Terraform provisions the following Azure resources:
 
-Azure Resource Group
-Azure Storage Account
-Azure Storage Container
+- Azure Resource Group
+- Azure Storage Account
+- Azure Storage Container
 
-Current Status
+---
+
+## Current Status
 
 The current version includes:
 
-Raw data ingestion
-JSON-to-CSV transformation
-Star schema generation
-SQL analytics queries
-Azure Blob Storage infrastructure provisioning
+- Raw data ingestion
+- JSON-to-CSV transformation
+- Star schema generation
+- SQL analytics queries
+- Azure Blob Storage infrastructure provisioning
 
-Roadmap
+---
+
+## Roadmap
 
 Planned improvements:
 
-Add Docker support
-Add structured logging
-Add automated tests
-Add data quality checks
-Add orchestration with Apache Airflow
-Load curated warehouse tables into Azure SQL or Synapse
-Add CI/CD with GitHub Actions
+- Add Docker support
+- Add structured logging
+- Add automated tests
+- Add data quality checks
+- Add orchestration with Apache Airflow
+- Load curated warehouse tables into Azure SQL or Synapse
+- Add CI/CD with GitHub Actions
 
-Author
+---
+
+## Author
 
 Ali Rıza Keles
