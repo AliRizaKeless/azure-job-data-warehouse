@@ -1,46 +1,55 @@
-Azure Job Data Warehouse
+# Azure Job Data Warehouse
+
 End-to-end data engineering project that ingests job market data, transforms raw JSON into structured datasets, models the data using a star schema, and prepares it for SQL-based analytics on Azure.
 
-Project Goal
+---
+
+## Project Goal
+
 The goal of this project is to demonstrate a cloud-oriented data warehouse pipeline using Python, SQL, and Azure infrastructure.
 
 This project covers the core stages of a modern data engineering workflow:
+
 - Raw data ingestion
 - Data transformation
 - Star schema modeling
 - SQL analytics
 - Azure Blob Storage provisioning with Terraform
 
-Architecture
-Job API / Feed
-      |
-      v
-Raw JSON Data
-      |
-      v
-Python Transformation Layer
-      |
-      v
-Processed CSV Datasets
-      |
-      v
-Star Schema Warehouse Tables
-      |
-      v
-SQL Analytics Layer
-      |
-      v
-Azure Blob Storage
+---
 
-Tech Stack
-Python
-SQL
-Terraform
-Azure Blob Storage
-CSV / JSON
-Git & GitHub
+## Architecture
 
-Project Structure
+- Job API / Feed
+  ↓
+- Raw JSON Data
+  ↓
+- Python Transformation Layer
+  ↓
+- Processed CSV Datasets
+  ↓
+- Star Schema Warehouse Tables
+  ↓
+- SQL Analytics Layer
+  ↓
+- Azure Blob Storage
+
+---
+
+## Tech Stack
+
+- Python
+- SQL
+- Terraform
+- Azure Blob Storage
+- CSV / JSON
+- Git & GitHub
+
+---
+
+## Project Structure
+
+```text
 azure-job-data-warehouse/
 ├── data/
 │   ├── raw/
@@ -64,7 +73,9 @@ azure-job-data-warehouse/
 ├── sql_queries.sql
 ├── requirements.txt
 └── README.md
+```
 
+---
 Data Model
 The warehouse layer follows a basic star schema design.
 
