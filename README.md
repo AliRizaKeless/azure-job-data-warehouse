@@ -77,9 +77,11 @@ azure-job-data-warehouse/
 
 ---
 Data Model
+
 The warehouse layer follows a basic star schema design.
 
 Fact Table
+
 fact_jobs
 
 | Column      | Description                        |
@@ -91,6 +93,7 @@ fact_jobs
 | date        | Job posting date                   |
 
 Dimension Tables
+
 companies
 
 | Column       | Description               |
@@ -112,7 +115,6 @@ Example Record
   "location": "BERGEN",
   "date": "2023-06-14"
 }
-
 Example SQL Query
 SELECT location, COUNT(*) AS job_count
 FROM fact_jobs
@@ -120,19 +122,27 @@ GROUP BY location
 ORDER BY job_count DESC;
 
 How to Run
+
 Install dependencies:
+
 pip install -r requirements.txt
+
 Run the pipeline:
+
 python run_pipeline.py
 
 Infrastructure
+
 Terraform provisions the following Azure resources:
+
 Azure Resource Group
 Azure Storage Account
 Azure Storage Container
 
 Current Status
+
 The current version includes:
+
 Raw data ingestion
 JSON-to-CSV transformation
 Star schema generation
@@ -140,7 +150,9 @@ SQL analytics queries
 Azure Blob Storage infrastructure provisioning
 
 Roadmap
+
 Planned improvements:
+
 Add Docker support
 Add structured logging
 Add automated tests
@@ -150,4 +162,5 @@ Load curated warehouse tables into Azure SQL or Synapse
 Add CI/CD with GitHub Actions
 
 Author
+
 Ali Rıza Keles
