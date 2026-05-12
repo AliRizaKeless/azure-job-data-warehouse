@@ -1,11 +1,37 @@
+# Python
 __pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+venv/
 .venv/
+env/
+
+# Environment variables
 .env
-*.pyc
-data/raw/*.json
-data/raw/*.json
-data/processed/*.csv
-data/warehouse/*.csv
-infra/.terraform/
-infra/*.tfstate
-infra/*.tfstate.backup
+
+# Data outputs
+data/raw/
+data/processed/
+data/warehouse/
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
