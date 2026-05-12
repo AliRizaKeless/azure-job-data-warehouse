@@ -1,24 +1,49 @@
-import json
 import csv
+import json
+import logging
 from pathlib import Path
 
-INPUT_FILE = "data/raw/jobs_20260330_194543.json"
-OUTPUT_FILE = "data/processed/jobs.csv"
+from src.azure_job_data_warehouse.utils.logging_config import configure_logging
 
-def transform():
-    with open(INPUT_FILE, "r", encoding="utf-8") as f:
-        data = json.load(f)
+
+configure_logging()
+logger = logging.getLogger(__name__)
+
+RAW_DATA_DIR = Path("data/raw")
+OUTPUT_FILE = Path("data/processed/jobs.csv")
+
+
+def get_latest_raw_file() -> Path:
+    json_files = sorted(RAW_DATA_DIR.glob("jobs_*.json"))
+
+    if not json_files:
+        raise FileNotFoundError("No raw job files found")
+
+    return json_files[-1]
+
+
+def transform() -> None:
+    input_file = get_latest_raw_file()
+
+    logger.info("Reading raw data from %s", input_file)
+
+    with open(input_file, "r", encoding="utf-8") as file:
+        data = json.load(file)
 
     jobs = data["items"]
 
-    output_dir = Path("data/processed")
-    output_dir.mkdir(parents=True, exist_ok=True)
+    OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
 
     with open(OUTPUT_FILE, "w", newline="", encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile)
 
-        # header
-        writer.writerow(["job_id", "title", "company", "location", "date"])
+        writer.writerow([
+            "job_id",
+            "title",
+            "company",
+            "location",
+            "date",
+        ])
 
         for job in jobs:
             entry = job["_feed_entry"]
@@ -29,9 +54,16 @@ def transform():
             location = entry.get("municipal")
             date = entry.get("sistEndret")
 
-            writer.writerow([job_id, title, company, location, date])
+            writer.writerow([
+                job_id,
+                title,
+                company,
+                location,
+                date,
+            ])
 
-    print(f"Saved transformed data to {OUTPUT_FILE}")
+    logger.info("Saved transformed data to %s", OUTPUT_FILE)
+
 
 if __name__ == "__main__":
     transform()
