@@ -23,15 +23,15 @@ def run_step(command: str, step_name: str) -> None:
 
 def main() -> None:
     run_step(
-        "python src/azure_job_data_warehouse/ingest/fetch_jobs.py",
+        "py -m src.azure_job_data_warehouse.ingest.fetch_jobs",
         "Ingestion",
     )
     run_step(
-        "python src/azure_job_data_warehouse/transform/transform_jobs.py",
+        "py -m src.azure_job_data_warehouse.transform.transform_jobs",
         "Transformation",
     )
     run_step(
-        "python src/azure_job_data_warehouse/transform/build_star_schema.py",
+        "py -m src.azure_job_data_warehouse.transform.build_star_schema",
         "Star Schema",
     )
 
